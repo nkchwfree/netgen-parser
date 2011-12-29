@@ -5,7 +5,10 @@
     "author": "nkchwfree <chwfree@gmail.com>",
     "dependencies": {
         "jsdom": ">= 0.2.10",
-        "mysql": ">= 0.9.5"
+        "mysql": ">= 0.9.5",
+        "queuer": ">= 0.1.0",
+        "devent": "https://github.com/netgen-inc/devent/tarball/master",
+        "queuer": "https://github.com/netgen-inc/queuer/tarball/master"
     },
     "scripts": {
         "start": "node main.js"
