@@ -1,0 +1,16 @@
+{
+    "name": "parser",
+    "version": "0.1.0",
+    "description": "Page Content Parser.",
+    "author": "nkchwfree <chwfree@gmail.com>",
+    "dependencies": {
+        "jsdom": ">= 0.2.10",
+        "mysql": ">= 0.9.5"
+    },
+    "scripts": {
+        "start": "node main.js"
+    },
+    "engines": {
+        "node": "0.6.x"
+    }
+}
