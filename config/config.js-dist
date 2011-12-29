@@ -2,8 +2,8 @@ exports.config = {
   "interval": 1000,
   "worker_number": 5,
   "mysql": {
-    "host": "127.0.0.1"
-    "port": 3306
+    "host": "127.0.0.1",
+    "port": 3306,
     "user": "root",
     "pass": "",
     "database": "stock_radar"

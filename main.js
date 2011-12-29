@@ -1,4 +1,4 @@
-var config = require('config/config').config;
+var config = require('./config/config').config;
 
 var Parser = require('./lib/parser').Parser;
 
