@@ -1,6 +1,8 @@
+var config = require('config/config').config;
+
 var Parser = require('./lib/parser').Parser;
 
-var parser = new Parser(5);
+var parser = new Parser( config.worker_number );
 
 
 var hook = require('devent').createDEvent('convertor');
@@ -32,7 +34,7 @@ hook.on('queued', function( queue ){
 
 var func = function(){
   parser.emit('has-task');
-  setTimeout(func, 10000);
+  setTimeout(func, config.interval);
 }
 
 func.call();
