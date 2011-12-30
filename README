@@ -1,0 +1,29 @@
+安装步骤：
+1，安装依赖软件包。
+    npm install -d
+2，修改配置文件，将config/config.js-dist重新命名为config/config.js,并修改相应配置项。
+
+配置说明：
+exports.config = {
+  //定期轮询队列的时间间隔，单位：毫秒
+  "interval": 1000,
+
+  //子进程数量
+  "worker_number": 5,
+
+  //数据库信息
+  "mysql": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "pass": "",
+    "database": "stock_radar"
+  },
+
+  //队列地址
+  "queue": "http://127.0.0.1:3000/queue"
+}
+
+3，启动程序。
+    node main.js
+
