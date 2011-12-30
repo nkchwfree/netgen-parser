@@ -19,7 +19,12 @@ parser.on('task-finished', function(task){
 
 var report_task_error = function(task) {
   try {
-    hook.emit('task-error', task);
+    if(task.retry<=3) {
+      hook.emit('task-error', task);
+    }
+    else {
+      hook.emit('task-finished', task);
+    }
   }
   catch(e) {
     console.log('Task-Error Error.');
