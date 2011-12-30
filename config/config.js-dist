@@ -8,5 +8,6 @@ exports.config = {
     "password": "",
     "database": "stock_radar"
   },
-  "queue": "http://127.0.0.1:3000/queue"
+  "queue": "http://127.0.0.1:3000/queue",
+  "php": "/usr/local/php/bin/php"
 }
