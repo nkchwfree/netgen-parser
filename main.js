@@ -1,4 +1,5 @@
 var config = require('./config/config').config;
+var log = require('./lib/log');
 
 var Parser = require('./lib/parser').Parser;
 
@@ -12,8 +13,8 @@ parser.on('task-finished', function(task){
     hook.emit('task-finished', task);
   }
   catch(e) {
-    console.log('Task Finished Error.');
-    console.log(e);
+    log.debug('Task Finished Error.');
+    log.debug(e);
   }
 });
 
@@ -27,8 +28,8 @@ var report_task_error = function(task) {
     }
   }
   catch(e) {
-    console.log('Task-Error Error.');
-    console.log(e);
+    log.debug('Task-Error Error.');
+    log.debug(e);
   }
 }
 parser.on('tidy-error', report_task_error);
@@ -38,9 +39,9 @@ parser.on('uri-error', report_task_error);
 parser.on('no-page-content', report_task_error);
 
 hook.on('queued', function( queue ){
-  console.log(queue);
+  log.debug(queue);
   if(queue=='page_content') {
-    console.log('emit event.');
+    log.debug('emit event.');
     parser.emit('has-task');
   }
 });

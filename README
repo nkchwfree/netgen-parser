@@ -24,7 +24,10 @@ exports.config = {
   "queue": "http://127.0.0.1:3000/queue",
 
   //php路径
-  "php": "/usr/local/php/bin/php"
+  "php": "/usr/local/php/bin/php",
+
+  //是否开启调试信息输出
+  "debug": true
 }
 
 3，启动程序。
