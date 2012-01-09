@@ -16,7 +16,7 @@ if(preg_match('#charset=([-a-z0-9]+)#msi', $buffer, $match)) {
         }
         $buffer = iconv($match[1], 'UTF-8//IGNORE', $buffer);
     }
-    print_r($match);
+    //print_r($match);
 }
 
 //exit;

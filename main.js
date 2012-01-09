@@ -51,6 +51,6 @@ var func = function(){
   setTimeout(func, config.interval);
 }
 
-func.call();
+func();
 
 
