@@ -15,7 +15,7 @@ process.on('message', function(data) {
         } else {
           window.__stopAllTimers();
           var parser = require('../lib/matcher/'+data.data.site+'.'+data.data.type);
-          parser.parse( window, function( error, match ){
+          parser.parse( window, data.data, function( error, match ){
             process.send( { 'key': data.key, 'data': match, 'error': error } );
           });
         }
