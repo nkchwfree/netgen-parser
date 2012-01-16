@@ -6,6 +6,7 @@ $tidy_options = array(
     'output-xml'   => true,
     'indent'       => true,
     'wrap'         => false,
+    'hide-comments' => true
   );
 $tidy = new tidy();
 
