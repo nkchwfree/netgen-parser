@@ -49,7 +49,7 @@ var parseList = [
 for(var i=0;i<parsePage.length;i++){
 	(function(ix){
 		parser.addBatch({
-	    parsePage[ix][0]:{
+	    "文章页面":{
 	        topic:function(){
 	            parse_one_page(__dirname+'/resources/'+parsePage[ix][1]+'.htm', this.callback);
 	        },
@@ -78,7 +78,7 @@ for(var i=0;i<parsePage.length;i++){
 for(var i=0;i<parsePage.length;i++){
 	(function(ix){
 		parser.addBatch({
-	    parsePage[ix][0]:{
+	    "列表页面":{
         topic:function(){
             parse_one_page(__dirname+'/resources/'+parsePage[ix][1]+'.htm', this.callback);
         },
