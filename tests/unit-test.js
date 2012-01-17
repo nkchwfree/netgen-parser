@@ -75,25 +75,25 @@ for(var i=0;i<parsePage.length;i++){
 	 })(i);
 };
 
-for(var i=0;i<parsePage.length;i++){
+for(var i=0;i<parseList.length;i++){
 	(function(ix){
 		parser.addBatch({
 	    "列表页面":{
         topic:function(){
-            parse_one_page(__dirname+'/resources/'+parsePage[ix][1]+'.htm', this.callback);
+            parse_one_page(__dirname+'/resources/'+parseList[ix][1]+'.htm', this.callback);
         },
         '解析内容正确':function(window){
-            var parser = require('./../lib/matcher/'+parsePage[ix][2]);
-            parser.parse( window, {date:parsePage[ix][3]}, function( error, match ){
+            var parser = require('./../lib/matcher/'+parseList[ix][2]);
+            parser.parse( window, {date:parseList[ix][3]}, function( error, match ){
                 if(error) {
                     console.log(error);
                     return;
                 }
                 //console.log(match);
 
-                assert.equal(match.url_list.length, parseInt(parsePage[ix][4]));
-                if(parsePage[ix][5]!='') assert.equal(match.url_list[0].url, parsePage[ix][5]);
-                if(parsePage[ix][7]!='') assert.equal(match.url_list[parseInt(parsePage[ix][6])].url, parsePage[ix][7]);
+                assert.equal(match.url_list.length, parseInt(parseList[ix][4]));
+                if(parseList[ix][5]!='') assert.equal(match.url_list[0].url, parseList[ix][5]);
+                if(parseList[ix][7]!='') assert.equal(match.url_list[parseInt(parseList[ix][6])].url, parseList[ix][7]);
             });
         }
      }
