@@ -184,5 +184,4 @@ vows.describe('Parser').addBatch({
             });
         }
      }
-
 }).export(module);

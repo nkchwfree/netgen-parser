@@ -22,7 +22,7 @@ process.on('message', function(data) {
       });
     }
     else {
-      process.send( { 'key': data.key, 'error': 'tidy-error' } );
+      process.send( { 'key': data.key, 'error': 'tidy-error '+error } );
     }
   }).stdin.end( data.data.text, 'binary' );
 });
