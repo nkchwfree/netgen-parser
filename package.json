@@ -6,6 +6,7 @@
     "dependencies": {
         "jsdom": ">= 0.2.10",
         "mysql": ">= 0.9.5",
+        "vows" : ">=0.6.1",
         "devent": "https://github.com/netgen-inc/devent/tarball/master",
         "queuer": "https://github.com/netgen-inc/queuer/tarball/master"
     },
