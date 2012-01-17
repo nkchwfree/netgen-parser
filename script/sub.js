@@ -6,7 +6,7 @@ process.on('message', function(data) {
     process.exit();
   }
 
-  exec(config.php+' '+__dirname+'/tidy.php', function(error, body, stderr){
+  exec(config.php+' '+__dirname+'/tidy.php', {maxBuffer:1024*1024}, function(error, body, stderr){
     if ( !error ) {
       var jsdom = require('jsdom');
       jsdom.env(body, [__dirname+'/jquery-1.7.1.min.js'], function(errors, window) {
