@@ -10,5 +10,8 @@ exports.config = {
   },
   "queue": "http://127.0.0.1:3000/queue",
   "php": "/usr/local/php/bin/php",
-  "debug": true
+  "debug": true,
+  "query_timeout":10,
+  "memory_limit": 60,
+  "max_buffer":2
 }
