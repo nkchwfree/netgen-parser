@@ -10,6 +10,7 @@ var hook = require('devent').createDEvent('convertor');
 
 parser.on('task-finished', function(task){
     try {
+        log.log('finish task: '+ task.uri);
         hook.emit('task-finished', task);
     }
     catch(e) {
@@ -18,13 +19,14 @@ parser.on('task-finished', function(task){
     }
 });
 
-var report_task_error = function(task) {
+var report_task_error = function(error, task) {
     try {
         if(task.retry<=3) {
+            log.log('report task error: '+error+' '+ task.uri);
             hook.emit('task-error', task);
         }
         else {
-            log.debug('finish error task after try '+ task.retry +'times.');
+            log.log('finish error task after try '+ task.retry +'times.');
             hook.emit('task-finished', task);
         }
     }
