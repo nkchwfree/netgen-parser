@@ -37,7 +37,9 @@ var parsePage = [
 	['解析新浪文章页面一','sina.article.1','sina.article','去年汽车销量增幅创13年新低 政策退潮致销量下滑'],
 	['解析新浪文章页面二','sina.article.2','sina.article','182万名银行职工人均年薪或超12万元'],
 	['解析金融界文章页面一','jrj.article.1','jrj.article','永泰能源：受益于产量大幅增长业绩超预期 买入'],
-	['解析金融界文章页面二','jrj.article.2','jrj.article','龙虎榜揭秘：主力资金逆市抢筹15股 撤离16股']
+	['解析金融界文章页面二','jrj.article.2','jrj.article','龙虎榜揭秘：主力资金逆市抢筹15股 撤离16股'],
+	['解析金融界文章页面三','jrj.article.3','jrj.article','2012年02月03日千股千评'],
+	['解析金融界文章页面四','jrj.article.4','jrj.article','龙虎榜揭秘：主力资金逆市抢筹15股 撤离16股']
 ];
 
 var parseList = [
