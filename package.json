@@ -7,6 +7,7 @@
         "jsdom": ">= 0.2.10",
         "mysql": ">= 0.9.5",
         "vows" : ">=0.6.1",
+        "async":">=0.1.15",
         "devent": "https://github.com/netgen-inc/devent/tarball/master",
         "queuer": "https://github.com/netgen-inc/queuer/tarball/master"
     },
