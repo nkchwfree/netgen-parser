@@ -52,6 +52,10 @@ hook.on('queued', function( queue ){
     }
 });
 
+process.on('uncaughtException', function(e){
+    console.log(['uncaughtException:', e]);
+});
+
 var func = function(){
     parser.emit('has-task');
     setTimeout(func, config.interval);
