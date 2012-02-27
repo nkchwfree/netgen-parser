@@ -39,7 +39,10 @@ parser.on('tidy-error', report_task_error);
 
 parser.on('uri-error', report_task_error);
 
-parser.on('no-page-content', report_task_error);
+parser.on('no-page-content', function(error, task){
+    log.log('no-page-content,finish task.'+task.uri);
+    hook.emit('task-finished', task);
+});
 
 hook.on('queued', function( queue ){
     log.debug(queue);
