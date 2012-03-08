@@ -50,6 +50,10 @@ var parseList = [
 	['解析金融界列表页面二','jrj.list.1','jrj.list','20120116','15','','14','http://stock.jrj.com.cn/hotstock/2012/01/16014512057440.shtml']
 ];
 
+var bulletinList = [
+	['解析新浪公告列表页面一','sina.bulletin.1','sina.bulletin','20120222','3','http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=300026&id=839022','1','http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=300026&id=837406','天津红日药业股份有限公司关于获得高新技术企业证书的公告']
+];
+
 for(var i=0;i<parsePage.length;i++){
 	(function(ix){
 		parser.addBatch({
@@ -98,6 +102,33 @@ for(var i=0;i<parseList.length;i++){
                 assert.equal(match.url_list.length, parseInt(parseList[ix][4]));
                 if(parseList[ix][5]!='') assert.equal(match.url_list[0].url, parseList[ix][5]);
                 if(parseList[ix][7]!='') assert.equal(match.url_list[parseInt(parseList[ix][6])].url, parseList[ix][7]);
+            });
+        }
+     }
+	  })
+	})(i);
+}
+
+for(var i=0;i<bulletinList.length;i++){
+	(function(ix){
+		parser.addBatch({
+	    "公告列表页面":{
+        topic:function(){
+            parse_one_page(__dirname+'/resources/'+bulletinList[ix][1]+'.htm', this.callback);
+        },
+        '解析内容正确':function(window){
+            var parser = require('./../lib/matcher/'+bulletinList[ix][2]);
+            parser.parse( window, {date:bulletinList[ix][3]}, function( error, match ){
+                if(error) {
+                    console.log(error);
+                    return;
+                }
+                //console.log(match);
+
+                assert.equal(match.bulletin_list.length, parseInt(bulletinList[ix][4]));
+                if(bulletinList[ix][5]!='') assert.equal(match.bulletin_list[0].url, bulletinList[ix][5]);
+                if(bulletinList[ix][7]!='') assert.equal(match.bulletin_list[parseInt(bulletinList[ix][6])].url, bulletinList[ix][7]);
+                if(bulletinList[ix][8]!='') assert.equal(match.bulletin_list[parseInt(bulletinList[ix][6])].text, bulletinList[ix][8]);
             });
         }
      }
