@@ -21,14 +21,8 @@ parser.on('task-finished', function(task){
 
 var report_task_error = function(error, task) {
     try {
-        if(task.retry<=3) {
-            log.log('report task error: '+error+' '+ task.uri);
-            hook.emit('task-error', task);
-        }
-        else {
-            log.log('finish error task after try '+ task.retry +'times.');
-            hook.emit('task-finished', task);
-        }
+        log.log('report task error: '+error+' '+ task.uri);
+        hook.emit('task-error', task);
     }
     catch(e) {
         log.debug('Task-Error Error.');
@@ -38,6 +32,12 @@ var report_task_error = function(error, task) {
 parser.on('tidy-error', report_task_error);
 
 parser.on('uri-error', report_task_error);
+
+//超过重试次数
+parser.on('retry_too_many_times', function(error, task){
+    log.log('finish error task after try '+ task.retry +'times.');
+    hook.emit('task-finished', task);
+});
 
 parser.on('no-page-content', function(error, task){
     log.log('no-page-content,finish task.'+task.uri);
