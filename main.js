@@ -45,9 +45,9 @@ parser.on('no-page-content', function(error, task){
 });
 
 hook.on('queued', function( queue ){
-    log.debug(queue);
+    //log.debug(queue);
     if(queue=='page_content') {
-        log.debug('emit event.');
+        //log.debug('emit event.');
         parser.emit('has-task');
     }
 });
