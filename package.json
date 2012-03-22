@@ -8,6 +8,7 @@
         "mysql": ">= 0.9.5",
         "vows" : ">=0.6.1",
         "underscore":">=1.3.1",
+        "async":">=0.1.16",
         "MD5":">=0.0.0",
         "devent": "https://github.com/netgen-inc/devent/tarball/master",
         "queuer": "https://github.com/netgen-inc/queuer/tarball/master"
