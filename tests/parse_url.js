@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 var request = require('request');
-var config = require('./config/config').config;
+var config = require('../config/config').config;
 var argv = require('optimist').argv;
 
 var site,type,url,data={};
@@ -136,19 +136,20 @@ if(argv.date) {
 
   } else {
     //console.log(body);
-    exec(config.php+' '+__dirname+'/script/tidy.php', {maxBuffer:1024*1024},function(error, body, stderr){
+    exec(config.php+' '+__dirname+'/../script/tidy.php', {maxBuffer:1024*1024},function(error, body, stderr){
     if ( !error ) {
-        //console.log(body);
+      //console.log(body);
       var jsdom = require('jsdom');
-      jsdom.env(body, [__dirname+'/script/jquery-1.7.1.min.js'], function(errors, window) {
+      jsdom.env(body, [__dirname+'/../script/jquery-1.7.1.min.js'], function(errors, window) {
         if( errors ){
           console.log('jsdom-error:'+errors);
         } else {
           window.__stopAllTimers();
-          var parser = require('./lib/matcher/'+site+'.'+type);
+          var parser = require('../lib/matcher/'+site+'.'+type);
           parser.parse( window, data, function( error, match ){
             console.log(match);
-            console.log(77);
+            console.log(match.url_list.length);
+            //console.log(match.content);
           });
         }
       });
@@ -159,6 +160,8 @@ if(argv.date) {
   }).stdin.end( body, 'binary' );
   }
 });
+
+
 
 
 
