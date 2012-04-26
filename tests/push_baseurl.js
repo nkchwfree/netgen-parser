@@ -1,6 +1,8 @@
 var queue = require('queuer');
-var config = require('./config/config').config;
+var config = require('../config/config').config;
 var url_content = queue.getQueue(config.queue, 'url');
+var argv = require('optimist').argv;
+
 function getQueueUrl(name, id) {
     return 'mysql://'+config.mysql.host+':'+config.mysql.port+'/'+config.mysql.database+'?'+name+'#'+id;
 }
@@ -91,4 +93,6 @@ pushBaseUrl(7402);
 //pushBaseUrl(10617);//东方财富网列表页
 //pushBaseUrl(10618);//东方财富网列表页
 
-pushBaseUrl(10619);//证券时报网列表页
+//pushBaseUrl(10619);//证券时报网列表页
+
+pushBaseUrl(argv.id);
