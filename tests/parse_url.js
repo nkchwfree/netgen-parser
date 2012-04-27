@@ -135,8 +135,10 @@ if(argv.date) {
     console.log(error);
 
   } else {
+    var strategy = config.tidy_strategy[site+'.'+type] || 'default';
+
     //console.log(body);
-    exec(config.php+' '+__dirname+'/../script/tidy.php', {maxBuffer:1024*1024},function(error, body, stderr){
+    exec(config.php+' '+__dirname+'/../script/tidy.php '+strategy, {maxBuffer:1024*1024},function(error, body, stderr){
     if ( !error ) {
       //console.log(body);
       var jsdom = require('jsdom');
@@ -148,7 +150,7 @@ if(argv.date) {
           var parser = require('../lib/matcher/'+site+'.'+type);
           parser.parse( window, data, function( error, match ){
             console.log(match);
-            console.log(match.url_list.length);
+            //console.log(match.url_list.length);
             //console.log(match.content);
           });
         }

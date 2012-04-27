@@ -13,5 +13,8 @@ exports.config = {
   "debug": true,
   "query_timeout":10,
   "memory_limit": 60,
-  "max_buffer":2
+  "max_buffer":2,
+  "tidy_strategy":{
+    "szse.bulllist":"original"
+  }
 }

@@ -27,7 +27,20 @@ exports.config = {
   "php": "/usr/local/php/bin/php",
 
   //是否开启调试信息输出
-  "debug": true
+  "debug": true,
+
+  //请求数据库的异步等待的超时时长
+  "query_timeout":10,
+
+  //子进程的内存限制，超过后会关闭并重启子进程
+  "memory_limit": 60,
+
+  "max_buffer":2,
+
+  //tidy处理的策略设置，默认是default
+  "tidy_strategy":{
+    "szse.bulllist":"original"
+  }
 }
 
 3，启动程序。
