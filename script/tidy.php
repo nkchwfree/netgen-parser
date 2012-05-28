@@ -1,9 +1,8 @@
 <?php
 
 $strategy = $argv[1];
-
+$buffer = file_get_contents('php://stdin');
 if($strategy=='default') {
-    $buffer = file_get_contents('php://stdin');
     $tidy_options = array(
         'input-xml'    => false,
         'output-xml'   => true,
@@ -30,7 +29,8 @@ if($strategy=='default') {
     $tidy->cleanRepair();
     echo $tidy;
 }
-else if($strategy=='original.gbk') { //原始网页内容是GBK，只需要转换编码
-    echo iconv("GBK", 'UTF-8//IGNORE', $buffer);
+else if($strategy=='original.utf8') { //原始网页内容是纯文本
+    //echo iconv("GBK", 'UTF-8//IGNORE', $buffer);
+    echo "<html><body>{$buffer}</body></html>";
 }
 ?>

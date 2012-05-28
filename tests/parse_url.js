@@ -130,37 +130,48 @@ if(argv.date) {
 
 
 
- request({ 'url' : url, 'encoding' : 'binary', 'timeout' : 50000 }, function(error, response, body) {
-  if (error) {
-    console.log(error);
+request({ 'url' : url, 'encoding' : 'binary', 'timeout' : 50000 }, function(error, response, body) {
+    if (error) {
+        console.log(error);
+    } else {
+        var strategy = config.tidy_strategy[site+'.'+type] || 'default';
 
-  } else {
-    var strategy = config.tidy_strategy[site+'.'+type] || 'default';
+        if(strategy === 'original.gbk') {
+            var iconv = require('../lib/iconv/iconv');
+            body = iconv.convert(body);
 
-    //console.log(body);
-    exec(config.php+' '+__dirname+'/../script/tidy.php '+strategy, {maxBuffer:1024*1024},function(error, body, stderr){
-    if ( !error ) {
-      //console.log(body);
-      var jsdom = require('jsdom');
-      jsdom.env(body, [__dirname+'/../script/jquery-1.7.1.min.js'], function(errors, window) {
-        if( errors ){
-          console.log('jsdom-error:'+errors);
-        } else {
-          window.__stopAllTimers();
-          var parser = require('../lib/matcher/'+site+'.'+type);
-          parser.parse( window, data, function( error, match ){
-            console.log(match);
-            //console.log(match.url_list.length);
-            //console.log(match.content);
-          });
+            var parser = require('../lib/matcher/'+site+'.'+type);
+            parser.parse( body, data, function( error, match ){
+                console.log(match);
+                //console.log(match.url_list.length);
+                //console.log(match.content);
+            });
         }
-      });
+        else {
+            exec(config.php+' '+__dirname+'/../script/tidy.php '+strategy, {maxBuffer:1024*1024},function(error, body, stderr){
+                if ( !error ) {
+                    console.log(body);
+                    var jsdom = require('jsdom');
+                    jsdom.env(body, [__dirname+'/../script/jquery-1.7.1.min.js'], function(errors, window) {
+                        if( errors ){
+                            console.log('jsdom-error:'+errors);
+                        } else {
+                            window.__stopAllTimers();
+                            var parser = require('../lib/matcher/'+site+'.'+type);
+                            parser.parse( window, data, function( error, match ){
+                                console.log(match);
+                                //console.log(match.url_list.length);
+                                //console.log(match.content);
+                            });
+                        }
+                    });
+                }
+                else {
+                  console.log('tidy-error:'+error);
+                }
+            }).stdin.end( body, 'binary' );
+        }
     }
-    else {
-      console.log('tidy-error:'+error);
-    }
-  }).stdin.end( body, 'binary' );
-  }
 });
 
 
