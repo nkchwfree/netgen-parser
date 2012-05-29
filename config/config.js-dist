@@ -6,7 +6,8 @@ exports.config = {
     "port": 3306,
     "user": "root",
     "password": "",
-    "database": "stock_radar"
+    "database": "stock_radar",
+    "charset": "UTF8"
   },
   "queue": "http://127.0.0.1:3000/queue",
   "php": "/usr/local/php/bin/php",

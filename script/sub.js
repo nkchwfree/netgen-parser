@@ -27,6 +27,7 @@ process.on('message', function(data) {
         });
     }
     else {
+        //console.log(data.data.text);
         exec(config.php+' '+__dirname+'/tidy.php '+ strategy, {maxBuffer:max_buffer*1024*1024}, function(error, body, stderr){
             if ( !error ) {
                 var jsdom = require('jsdom');
