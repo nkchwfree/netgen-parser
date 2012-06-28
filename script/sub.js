@@ -27,6 +27,18 @@ process.on('message', function(data) {
         });
     }
     else {
+        var content = data.data.text;
+        content = content.replace(/<\/(strong|em|i|font)>/g,'').replace(/<(strong|em|i|font)( +[^<>]*)?>/g,'');
+        content = content.replace(/document.write(ln)?\('<script /g,'');
+
+        var match;
+        var encoding = "binary";
+        if(match = content.match(/charset=(utf-8)/i)) {
+            //encoding = 'utf8';//match[1];
+        }
+        //console.log(encoding);
+        var buffer = new Buffer(content, encoding);
+
         //console.log(data.data.text);
         exec(config.php+' '+__dirname+'/tidy.php '+ strategy, {maxBuffer:max_buffer*1024*1024}, function(error, body, stderr){
             if ( !error ) {
@@ -52,6 +64,6 @@ process.on('message', function(data) {
             else {
                 process.send( { 'key': data.key, 'error': 'tidy-error '+error } );
             }
-        }).stdin.end( data.data.text, 'binary' );
+        }).stdin.end( buffer );
     }
 });
