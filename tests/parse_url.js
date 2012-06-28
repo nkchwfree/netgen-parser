@@ -10,7 +10,7 @@ request({ 'url' : argv.url, 'encoding' : 'binary', 'timeout' : 50000 }, function
     if (error) {
         console.log(error);
     } else {
-        var params = {text:body, site:argv.site, type:argv.type, date:argv.date, url:argv.url};
+        var params = {text:new Buffer(body,'binary'), site:argv.site, type:argv.type, date:argv.date, url:argv.url};
         workers.send(params, function(error, match){
             if(error) {
                 console.log(error);

@@ -1,5 +1,7 @@
 var exec = require('child_process').exec;
 var config = require('../config/config').config;
+var news_config = require("../config/news").list;
+//var md5 = require('MD5');
 
 process.on('message', function(data) {
     //子进程的内存限制默认是64M。
@@ -27,19 +29,21 @@ process.on('message', function(data) {
         });
     }
     else {
-        var content = data.data.text;
+        var b = new Buffer(data.data.text);
+        var content = b.toString('binary');
+        //console.log(md5(content)+':'+content.length);
         content = content.replace(/<\/(strong|em|i|font)>/g,'').replace(/<(strong|em|i|font)( +[^<>]*)?>/g,'');
         content = content.replace(/document.write(ln)?\('<script /g,'');
 
         var match;
         var encoding = "binary";
-        if(match = content.match(/charset=(utf-8)/i)) {
+        /*if(match = content.match(/charset=(utf-8)/i)) {
             //encoding = 'utf8';//match[1];
-        }
+        }*/
         //console.log(encoding);
         var buffer = new Buffer(content, encoding);
 
-        //console.log(data.data.text);
+
         exec(config.php+' '+__dirname+'/tidy.php '+ strategy, {maxBuffer:max_buffer*1024*1024}, function(error, body, stderr){
             if ( !error ) {
                 var jsdom = require('jsdom');
@@ -56,7 +60,27 @@ process.on('message', function(data) {
                             });
                         }
                         catch(e) {
-                            console.log(e);
+                            //console.log(data.data.site+'.'+data.data.type);
+                            //通用文章页面
+                            if(data.data.type=='article') {
+                                var parser = require('../lib/matcher/common.article');
+                                parser.parse( window, data.data, function(err, match){
+                                    process.send( { 'key': data.key, 'data': match, 'error': err } );
+                                });
+                            }
+                            else if(news_config[data.data.site+'.'+data.data.type]) {
+                                //通用的列表页面
+                                var param = data.data;
+                                param.config = news_config[data.data.site+'.'+data.data.type];
+                                var parser = require('../lib/matcher/common.list');
+                                parser.parse( window, param, function(err, match){
+                                    process.send( { 'key': data.key, 'data': match, 'error': err } );
+                                });
+                            }
+                            else {
+                                console.log(e);
+                            }
+                            //var parser = require('../lib/matcher/common.'+data.data.type);
                         }
                     }
                 });
