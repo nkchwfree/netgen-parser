@@ -12,6 +12,19 @@ exports.list = {
 
 
     "xinhua08.list":{
-        path:"ul.unilist li a"
+        path:"ul.unilist li a",
+        url_filter:function(url, date){
+            var pattern = new RegExp(date+'\\/\\d+\\.shtml$');
+            //pattern = /20120313\/\d+\.shtml$/;
+            //console.log('/'+date+'\\/\\d+\\.shtml$/');
+            if(url.match(pattern)!=null) {
+                //console.log(url);
+                //console.log(date);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 };
